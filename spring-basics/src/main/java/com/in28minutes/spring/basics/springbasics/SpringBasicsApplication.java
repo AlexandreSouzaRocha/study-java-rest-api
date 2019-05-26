@@ -10,6 +10,7 @@ public class SpringBasicsApplication {
 
 	public static void main(String[] args) {
 
+		
 		BinarySearchImpl binarySearch = new BinarySearchImpl(new QuickSortAlgorithm());
 		result = binarySearch.binarySearch(new int[] { 12, 4, 6 }, 3);
 
