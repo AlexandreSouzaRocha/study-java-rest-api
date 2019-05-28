@@ -1,5 +1,8 @@
 package com.in28minutes.spring.basics.springbasics;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class QuickSortAlgorithm implements SortAlgorithm {
 	int result;
 	int i;
