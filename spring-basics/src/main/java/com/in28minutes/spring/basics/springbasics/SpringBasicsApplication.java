@@ -16,7 +16,7 @@ public class SpringBasicsApplication {
 				applicationContext.getBean(BinarySearchImpl.class);
 		
 		int result = binarySearch.binarySearch(new int[] { 12, 4, 6 }, 3);
-		System.out.println(result);
+		System.out.println(result + "/S");
 	}
 
 }
