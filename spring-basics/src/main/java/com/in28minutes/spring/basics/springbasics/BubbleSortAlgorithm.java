@@ -1,10 +1,5 @@
 package com.in28minutes.spring.basics.springbasics;
 
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
-
-@Component
-@Primary
 public class BubbleSortAlgorithm implements SortAlgorithm{
 	int result;
 	int i;
