@@ -1,10 +1,13 @@
-package com.in28minutes.rest.webservices.restfulapi.users;
+package com.in28minutes.rest.webservices.restfulapi.resource;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.in28minutes.rest.webservices.restfulapi.service.UserDAOService;
+import com.in28minutes.rest.webservices.restfulapi.users.User;
 
 @RestController
 public class UsersResource {
