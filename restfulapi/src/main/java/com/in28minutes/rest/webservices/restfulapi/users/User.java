@@ -2,13 +2,13 @@ package com.in28minutes.rest.webservices.restfulapi.users;
 
 import java.util.Date;
 
-public class Users {
+public class User {
 
 	private Integer id;
 	private String name;
 	private Date birthDate;
 
-	public Users(Integer id, String name, Date birthDate) {
+	public User(Integer id, String name, Date birthDate) {
 		super();
 		this.id = id;
 		this.name = name;
