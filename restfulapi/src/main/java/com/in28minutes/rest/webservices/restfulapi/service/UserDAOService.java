@@ -23,7 +23,7 @@ public class UserDAOService {
 		return usersList;
 	}
 
-	public List<User> saveUser(User user) {
+	public User saveUser(User user) {
 
 		if (user.getId() == null) {
 
@@ -31,7 +31,7 @@ public class UserDAOService {
 		}
 
 		usersList.add(user);
-		return usersList;
+		return user;
 	}
 
 	public User findOneUser(int id) {
