@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.util.UriComponents;
 
 import com.in28minutes.spring.rest.restfulapi.entities.User;
 import com.in28minutes.spring.rest.restfulapi.services.UserService;
@@ -19,7 +18,7 @@ import com.in28minutes.spring.rest.restfulapi.services.UserService;
 @RestController
 public class UserResource {
 
-	@Autowired
+	@Autowired	
 	private UserService service;
 
 	@GetMapping("/users")
