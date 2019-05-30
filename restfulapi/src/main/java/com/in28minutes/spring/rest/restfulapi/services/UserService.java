@@ -2,6 +2,7 @@ package com.in28minutes.spring.rest.restfulapi.services;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -13,7 +14,7 @@ public class UserService {
 
 	private static int userCount = 3;
 	private static List<User> usersList = new ArrayList<>();
-	
+
 	static {
 		usersList.add(new User(1, "Alexandre", new Date()));
 		usersList.add(new User(2, "José", new Date()));
@@ -36,6 +37,20 @@ public class UserService {
 	public User findOneuser(int id) {
 		for (User user : usersList) {
 			if (user.getId() == id) {
+				return user;
+			}
+		}
+		return null;
+	}
+
+	public User deleteUserById(int id) {
+		Iterator<User> iterator = usersList.iterator();
+
+		while (iterator.hasNext()) {
+			User user = iterator.next();
+
+			if (user.getId() == id) {
+				iterator.remove();
 				return user;
 			}
 		}
