@@ -2,10 +2,14 @@ package com.in28minutes.spring.rest.restfulapi.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.concurrent.LinkedTransferQueue;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.core.DummyInvocationUtils;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,15 +36,22 @@ public class UserResource {
 	}
 
 	@GetMapping("/find-user")
-	public User retrieveOneUser(@RequestParam int id) {
+	public Resource<User> retrieveOneUser(@RequestParam int id) {
 		User findUser = service.findOneuser(id);
 
 		if (findUser == null)
 			throw new UserNotFoundException("User " + id + "  Not found");
 
-		return findUser;
+		Resource<User> resource = new Resource<User>(findUser);
+
+		ControllerLinkBuilder linkTo = 
+				ControllerLinkBuilder.linkTo(this.getClass(),
+						retrieveAllUsers());
+		resource.add(linkTo.withRel("add-user"));
+
+		return resource;
 	}
-	
+
 	@DeleteMapping("/delete-user")
 	public void deleteUser(@RequestParam int id) {
 		User deleteUser = service.deleteUserById(id);
@@ -55,9 +66,7 @@ public class UserResource {
 	public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
 		User saveUser = service.saveUser(user);
 
-		URI location = ServletUriComponentsBuilder
-				.fromCurrentRequest()
-				.path("/{id}").buildAndExpand(saveUser.getId())
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(saveUser.getId())
 				.toUri();
 
 		return ResponseEntity.created(location).build();
