@@ -30,7 +30,7 @@ public class UserResource {
 	@Autowired
 	private UserService service;
 
-	@GetMapping("/users")
+	@GetMapping(value = "/users")
 	public List<User> retrieveAllUsers() {
 		return service.findAllUsers();
 	}
