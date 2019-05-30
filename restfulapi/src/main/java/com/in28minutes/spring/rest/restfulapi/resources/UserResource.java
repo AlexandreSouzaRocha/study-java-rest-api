@@ -9,16 +9,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.in28minutes.spring.rest.restfulapi.entities.User;
+import com.in28minutes.spring.rest.restfulapi.exceptions.UserNotFoundException;
 import com.in28minutes.spring.rest.restfulapi.services.UserService;
 
 @RestController
 public class UserResource {
 
-	@Autowired	
+	@Autowired
 	private UserService service;
 
 	@GetMapping("/users")
@@ -26,20 +28,26 @@ public class UserResource {
 		return service.findAllUsers();
 	}
 
-	@GetMapping("/find-one")
-	public User retrieveOnesers(@RequestParam int id) {
-		return service.findOneuser(id);
+	@GetMapping("/find-user")
+	public User retrieveOneser(@RequestParam int id) {
+		User findUser = service.findOneuser(id);
+
+		if (findUser == null)
+			throw new UserNotFoundException("User " + id + "  Not found");
+
+		return findUser;
 	}
 
-	@PostMapping(value = "/create-user", consumes= "application/json")
+	@PostMapping(value = "/create-user", consumes = "application/json")
+	@ResponseBody
 	public ResponseEntity<Object> createUser(@RequestBody User user) {
 		User saveUser = service.saveUser(user);
-		
+
 		URI location = ServletUriComponentsBuilder
-			.fromCurrentRequest()
-			.path("/{id}")
-			.buildAndExpand(saveUser.getId()).toUri();
-		
+				.fromCurrentRequest()
+				.path("/{id}").buildAndExpand(saveUser.getId())
+				.toUri();
+
 		return ResponseEntity.created(location).build();
 	}
 }
