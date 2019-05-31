@@ -2,13 +2,11 @@ package com.in28minutes.spring.rest.restfulapi.resources;
 
 import java.net.URI;
 import java.util.List;
-import java.util.concurrent.LinkedTransferQueue;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.core.DummyInvocationUtils;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
