@@ -11,5 +11,6 @@ This project is the basics of ORM with JPA and Database connection.
 # restfulapi
 This project is the simple RESTful API with the methods GET, POST and DELETE. This project have a simple ORM with JPA and Database connection, and contains a simple security with Spring security.
 Below follow the user and pass of the Spring Security Authentication:
+<br>
 User: <b>restapi</b>
 Pass: <b>restapipass</b>
