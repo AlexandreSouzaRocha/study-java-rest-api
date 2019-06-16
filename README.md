@@ -13,4 +13,5 @@ This project is the simple RESTful API with the methods GET, POST and DELETE. Th
 Below follow the user and pass of the Spring Security Authentication:
 <br>
 User: <b>restapi</b>
+<br>
 Pass: <b>restapipass</b>
