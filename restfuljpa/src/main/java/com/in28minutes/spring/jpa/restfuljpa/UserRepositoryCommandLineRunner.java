@@ -1,13 +1,18 @@
 package com.in28minutes.spring.jpa.restfuljpa;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 import com.in28minutes.spring.jpa.restfuljpa.entity.User;
 import com.in28minutes.spring.jpa.restfuljpa.repository.UserRepository;
 
+@Component
 public class UserRepositoryCommandLineRunner implements CommandLineRunner {
 
 	private static final Logger log = 
@@ -15,6 +20,9 @@ public class UserRepositoryCommandLineRunner implements CommandLineRunner {
 	
 	@Autowired
 	private UserRepository userRepository;
+
+	Optional<User> findById;
+	List<User> findAll;
 	
 	
 	@Override
@@ -23,6 +31,12 @@ public class UserRepositoryCommandLineRunner implements CommandLineRunner {
 		
 		userRepository.save(user);
 		log.info("New User is created: " + user);
+		
+		findById = userRepository.findById(1L);
+		log.info("User retrieved: " + user);
+		
+		findAll = userRepository.findAll();
+		log.info("All Users: " + user);
 	}
 	
 
