@@ -7,10 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 import com.in28minutes.spring.jpa.restfuljpa.entity.User;
 import com.in28minutes.spring.jpa.restfuljpa.repository.UserRepository;
 
+@Component
 public class UserRepositoryCommandLineRunner implements CommandLineRunner {
 
 	private static final Logger log = 
