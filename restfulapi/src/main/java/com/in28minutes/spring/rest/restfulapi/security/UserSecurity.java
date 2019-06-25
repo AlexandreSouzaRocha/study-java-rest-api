@@ -22,14 +22,15 @@ public class UserSecurity extends WebSecurityConfigurerAdapter {
 	    }
 	 
 	 @Override
-	protected void configure(HttpSecurity http) throws Exception {
-		 http.csrf()
+	protected void configure(HttpSecurity httpSecurity) throws Exception {
+		 httpSecurity.csrf()
 		 	.disable()
 		 	.authorizeRequests()
-		 	.antMatchers("/restapi").permitAll()
+		 	.antMatchers("/restapi/**").permitAll()
 		 	.anyRequest().authenticated()
-		 	.and()
-		 	.httpBasic();
+		 	.and().httpBasic();
+		 
+		 	 httpSecurity.headers().frameOptions().disable();
 	}
 	 
 	 @Bean
