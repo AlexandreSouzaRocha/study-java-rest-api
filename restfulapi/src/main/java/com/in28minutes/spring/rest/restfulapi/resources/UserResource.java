@@ -2,6 +2,7 @@ package com.in28minutes.spring.rest.restfulapi.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -20,27 +21,27 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.in28minutes.spring.rest.restfulapi.entities.User;
 import com.in28minutes.spring.rest.restfulapi.exceptions.UserNotFoundException;
-import com.in28minutes.spring.rest.restfulapi.services.UserService;
+import com.in28minutes.spring.rest.restfulapi.repository.UserRepository;
 
 @RestController
 public class UserResource {
-
+	
 	@Autowired
-	private UserService service;
+	private UserRepository userRepository;
 
-	@GetMapping(value = "/users")
+	@GetMapping(value = "/jpa/users")
 	public List<User> retrieveAllUsers() {
-		return service.findAllUsers();
+		return userRepository.findAll();
 	}
 
-	@GetMapping("/find-user")
+	@GetMapping("/jpa/find-user")
 	public Resource<User> retrieveOneUser(@RequestParam int id) {
-		User findUser = service.findOneuser(id);
+		Optional<User> findUser = userRepository.findById(id);
 
-		if (findUser == null)
+		if (!findUser.isPresent())
 			throw new UserNotFoundException("User " + id + "  Not found");
 
-		Resource<User> resource = new Resource<User>(findUser);
+		Resource<User> resource = new Resource<User>(findUser.get());
 
 		ControllerLinkBuilder linkTo = 
 				ControllerLinkBuilder.linkTo(this.getClass(),
@@ -50,22 +51,22 @@ public class UserResource {
 		return resource;
 	}
 
-	@DeleteMapping("/delete-user")
+	@DeleteMapping("/jpa/delete-user")
 	public void deleteUser(@RequestParam int id) {
-		User deleteUser = service.deleteUserById(id);
-
-		if (deleteUser == null)
-			throw new UserNotFoundException("User " + id + "  Not found");
-
+		userRepository.deleteById(id);
 	}
 
-	@PostMapping(value = "/create-user", consumes = "application/json")
+	@PostMapping(value = "/jpa/create-user", consumes = "application/json")
 	@ResponseBody
 	public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
-		User saveUser = service.saveUser(user);
+		@Valid
+		User save = userRepository.save(user);
 
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(saveUser.getId())
-				.toUri();
+		URI location = ServletUriComponentsBuilder
+						.fromCurrentRequest()
+						.path("/{id}")
+						.buildAndExpand(save.getId())
+						.toUri();
 
 		return ResponseEntity.created(location).build();
 	}
