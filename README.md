@@ -1,5 +1,11 @@
 # java-rest-api
 Learn REST API from Udemy course, this include JPA + Spring Boot framework
+
+### About Repository
+```text
+This reposiory I used to learn about the Rest API's with java and Spring Boot on the udemy course: https://www.udemy.com/course/spring-web-services-tutorial.
+```
+
 #### Course link 
 - https://www.udemy.com/course/spring-web-services-tutorial/
 <hr>
