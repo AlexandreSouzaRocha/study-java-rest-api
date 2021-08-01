@@ -1,4 +1,4 @@
-# api-rest-estudo
+# java-rest-api
 Learn REST API from Udemy course, this include JPA + Spring Boot framework
 #### Course link 
 - https://www.udemy.com/course/spring-web-services-tutorial/
